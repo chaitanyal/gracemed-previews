@@ -167,7 +167,6 @@
       ],
       insurance: {
         title: 'Major plans accepted',
-        copy: 'Insurance logos shown are for accepted plans represented in this preview.',
         plans: [
           { name: 'Blue Cross Blue Shield of Texas', logo: '../shared/logos/bcbstx-logo.svg' },
           { name: 'Cigna Healthcare', logo: '../shared/logos/cignahlthcr.svg' },
@@ -281,7 +280,7 @@
     }
 
     function InsuranceSection({ insurance }) {
-      return `<section id="insurance" class="section border-t border-slate-100 bg-[#EEF4FA]"><div class="section-shell rounded-[2rem] border border-white/70 bg-white/80 p-8 shadow-soft backdrop-blur md:p-12"><div class="grid grid-cols-1 gap-10 lg:grid-cols-3"><div><p class="eyebrow">Insurance</p><h2 class="section-title">${esc(insurance.title)}</h2></div><div class="lg:col-span-2"><p class="flex items-start gap-3 text-lg leading-8 text-slate-600">${icon('ShieldCheck', 'mt-1 h-5 w-5 shrink-0 text-brand-accent')}<span>${esc(insurance.copy)}</span></p><div class="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-3">${insurance.plans.map(plan => `<div class="interactive-card flex min-h-28 items-center justify-center rounded-2xl border border-slate-200 bg-white px-6 py-5 shadow-sm"><img src="${esc(plan.logo)}" alt="${esc(plan.name)}" loading="lazy" class="max-h-14 max-w-full object-contain" /></div>`).join('')}</div></div></div></div></section>`;
+      return `<section id="insurance" class="section border-t border-slate-100 bg-[#EEF4FA]"><div class="section-shell rounded-[2rem] border border-white/70 bg-white/80 p-8 shadow-soft backdrop-blur md:p-12"><div class="grid grid-cols-1 gap-10 lg:grid-cols-3"><div><p class="eyebrow">Insurance</p><h2 class="section-title">${esc(insurance.title)}</h2></div><div class="lg:col-span-2"><div class="grid grid-cols-1 gap-4 sm:grid-cols-3">${insurance.plans.map(plan => `<div class="interactive-card flex min-h-28 items-center justify-center rounded-2xl border border-slate-200 bg-white px-6 py-5 shadow-sm"><img src="${esc(plan.logo)}" alt="${esc(plan.name)}" loading="lazy" class="max-h-14 max-w-full object-contain" /></div>`).join('')}</div></div></div></div></section>`;
     }
 
     function FAQSection({ faqs }) {
