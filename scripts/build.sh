@@ -4,13 +4,15 @@ set -euo pipefail
 rm -rf dist
 mkdir -p dist
 
-rsync -a ./ dist/ \
-  --exclude='.git/' \
-  --exclude='dist/' \
-  --exclude='scripts/' \
-  --exclude='node_modules/' \
-  --exclude='AGENTS.md' \
-  --exclude='README.md' \
-  --exclude='wrangler.toml' \
-  --exclude='.DS_Store' \
-  --exclude='**/.DS_Store'
+for item in ./*; do
+  name="$(basename "$item")"
+  case "$name" in
+    AGENTS.md|README.md|wrangler.toml|scripts|dist|node_modules)
+      continue
+      ;;
+  esac
+
+  cp -R "$item" dist/
+done
+
+find dist -name '.DS_Store' -type f -delete
