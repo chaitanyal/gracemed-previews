@@ -43,6 +43,16 @@ Use the build script so repository-only files such as `AGENTS.md` are not publis
 - Build command: `./scripts/build.sh`
 - Build output directory: `dist`
 
+## Image Optimization
+
+Generate WebP copies of raster images and update HTML references with:
+
+```bash
+python3 scripts/convert_images_to_webp.py --update-html
+```
+
+The script scans source `images/` folders, skips SVG/WebP files, and ignores generated folders like `dist/`.
+
 ## Development Notes
 
 - Use relative asset paths, because previews are served from subpaths.
