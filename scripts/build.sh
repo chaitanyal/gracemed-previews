@@ -9,7 +9,7 @@ mkdir -p dist
 for item in ./*; do
   name="$(basename "$item")"
   case "$name" in
-    AGENTS.md|README.md|wrangler.toml|scripts|dist|node_modules|package.json|package-lock.json|tailwind.config.js)
+    AGENTS.md|README.md|wrangler.toml|scripts|templates|dist|node_modules|package.json|package-lock.json|tailwind.config.js)
       continue
       ;;
   esac
