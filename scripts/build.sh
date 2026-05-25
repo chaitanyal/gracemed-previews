@@ -3,6 +3,12 @@ set -euo pipefail
 
 npm run build:css
 
+for practice_dir in ./*/; do
+  if [[ -f "${practice_dir}index.html" && -d "${practice_dir}assets" && "${practice_dir}" != "./northhillspsychiatry/" ]]; then
+    cp ./northhillspsychiatry/assets/styles.css "${practice_dir}assets/styles.css"
+  fi
+done
+
 rm -rf dist
 mkdir -p dist
 
