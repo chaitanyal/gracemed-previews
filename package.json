@@ -1,5 +1,6 @@
 {
   "scripts": {
+    "build": "bash scripts/build.sh",
     "build:css": "tailwindcss -c tailwind.config.js -i ./shared/styles/frontdoor.css -o ./northhillspsychiatry/assets/styles.css --minify"
   },
   "devDependencies": {

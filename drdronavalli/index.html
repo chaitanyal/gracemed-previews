@@ -20,110 +20,11 @@
       wellness: { primary: '#4A5568', accent: '#7C6F64', brand800: '#3B4556', brand900: '#2D3748', surface: '#FAF8F4', headingFont: 'Inter', bodyFont: 'Inter' },
     };
 
-    const practiceConfig = {
-      theme: 'psychiatry',
-      seo: {
-        title: 'Goutham Dronavalli, MD | Pulmonary Care in Sugar Land',
-        description: 'Pulmonary and critical care medicine with practical, personalized care for patients in Sugar Land and the Houston area.',
-        ogImage: './images/hero/hero.webp',
-      },
-      practice: {
-        name: 'Goutham Dronavalli, MD',
-        tagline: 'Pulmonary & Critical Care Medicine',
-        locationLabel: 'Located in Sugar Land, Texas',
-        phone: '(832) 500-1430',
-        phoneHref: 'tel:+18325001430',
-        email: 'pulmonary@hillcroftmed.com',
-        addressLines: ['1429 Highway 6', 'Suite 303', 'Sugar Land, TX 77478'],
-        socialLinks: [],
-      },
-      hero: {
-        image: './images/hero/hero.webp',
-        title: 'Practical, personalized care for lung health.',
-        copy: 'Pulmonary and critical care expertise for patients managing asthma, COPD, sleep apnea, shortness of breath, lung disease, and complex respiratory concerns.',
-        primaryCta: 'Request Appointment',
-        secondaryCta: 'Meet Dr. Dronavalli',
-      },
-      trustItems: [
-        { icon: 'Stethoscope', text: 'Pulmonary specialist' },
-        { icon: 'HeartPulse', text: 'Critical care expertise' },
-        { icon: 'Activity', text: 'In-office pulmonary testing' },
-        { icon: 'MapPin', text: 'Sugar Land office' },
-      ],
-      providers: [
-        {
-          slug: 'goutham-dronavalli',
-          name: 'Dr. Goutham Dronavalli',
-          credentials: 'MD · Pulmonary & Critical Care Medicine',
-          image: './images/providers/goutham_dronavalli.webp',
-          specialties: ['Pulmonary disease', 'Critical care', 'Sleep disorders'],
-          philosophy: '',
-          bio: 'Dr. Dronavalli completed internal medicine residency at East Tennessee State University and fellowship training in pulmonary, critical care, and lung transplant at Baylor College of Medicine.',
-        },
-      ],
-      conditionsIntro: 'Evaluation and care for common and complex respiratory conditions.',
-      conditions: [
-        'Asthma',
-        'COPD',
-        'Bronchitis',
-        'Emphysema',
-        'Shortness of Breath',
-        'Sleep Apnea & Sleep Disorders',
-        'Pulmonary Disease',
-        'Pneumonia',
-        'Low Blood Oxygen Level',
-        'Lung Transplant Care',
-        'Respiratory Failure',
-        'Allergies',
-      ],
-      insurance: {
-        title: 'Major plans accepted',
-        copy: 'Please call the office to confirm benefits, referral requirements, and appointment availability.',
-        plans: [
-          { name: 'Aetna', logo: '../shared/logos/aetna.svg' },
-          { name: 'Anthem', logo: '../shared/logos/anthem.svg' },
-          { name: 'Blue Cross Blue Shield of Texas', logo: '../shared/logos/bcbstx-logo.svg' },
-          { name: 'Cigna Healthcare', logo: '../shared/logos/cignahlthcr.svg' },
-          { name: 'Humana', logo: '../shared/logos/humana.svg' },
-        ],
-      },
-      faqs: [
-        { question: 'What conditions does Dr. Dronavalli treat?', answer: 'Dr. Dronavalli treats pulmonary and respiratory conditions including asthma, COPD, bronchitis, emphysema, pneumonia, shortness of breath, low blood oxygen levels, sleep apnea, and other lung diseases.' },
-        { question: 'What testing is available in office?', answer: 'Services listed by the practice include pulmonary function testing, six-minute walk testing, allergy skin testing, allergy immunotherapy, and home sleep studies.' },
-        { question: 'How do I request an appointment?', answer: 'Call the office at (832) 500-1430 or contact the practice by email. For urgent questions, the practice recommends phone or fax rather than email.' },
-      ],
-      contact: {
-        eyebrow: 'Request care',
-        title: 'Ready to schedule a pulmonary visit?',
-        copy: 'Contact the office for appointment availability, insurance details, and next steps for pulmonary or sleep-related concerns.',
-        disclaimer: 'For pressing questions, please contact the office by phone or fax.',
-      },
-      location: {
-        title: 'Pulmonary care in Sugar Land',
-        officeImage: './images/office/office.webp',
-        officeImageAlt: 'Pulmonary practice office',
-        directionsHref: 'https://www.google.com/maps/search/?api=1&query=1429+Highway+6+Suite+303+Sugar+Land+TX',
-        timeZone: 'America/Chicago',
-        hours: [
-          ['Monday', '9:00 AM – 5:00 PM'],
-          ['Tuesday', '9:00 AM – 5:00 PM'],
-          ['Wednesday', '9:00 AM – 5:00 PM'],
-          ['Thursday', '9:00 AM – 5:00 PM'],
-          ['Friday', '9:00 AM – 5:00 PM'],
-          ['Saturday–Sunday', 'Closed'],
-        ],
-        weeklyHours: {
-          Monday: { open: '09:00', close: '17:00' },
-          Tuesday: { open: '09:00', close: '17:00' },
-          Wednesday: { open: '09:00', close: '17:00' },
-          Thursday: { open: '09:00', close: '17:00' },
-          Friday: { open: '09:00', close: '17:00' },
-          Saturday: { closed: true },
-          Sunday: { closed: true },
-        },
-      },
-      footer: { links: ['Privacy', 'Accessibility', 'Contact'] },
-    };
+    async function loadPracticeConfig() {
+      const response = await fetch('./practice.json');
+      if (!response.ok) throw new Error(`Unable to load practice.json: ${response.status}`);
+      return response.json();
+    }
 
     const icon = (name, cls = 'h-4 w-4') => `<i data-lucide="${name}" class="${cls}" aria-hidden="true"></i>`;
     const esc = (value) => String(value).replace(/[&<>"]/g, (char) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[char]));
@@ -294,7 +195,12 @@
       lucide.createIcons();
     }
 
-    render(practiceConfig);
+    loadPracticeConfig()
+      .then(render)
+      .catch((error) => {
+        console.error(error);
+        document.getElementById('app').innerHTML = '<main class="page-shell py-20"><h1 class="text-3xl font-semibold text-slate-950">Unable to load site content.</h1><p class="mt-4 text-slate-600">Please try again later.</p></main>';
+      });
   </script>
 </body>
 </html>

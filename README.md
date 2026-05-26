@@ -1,4 +1,4 @@
-# Frontdoor Health Previews
+# FrontDoor Health Previews
 
 Static HTML preview sites for small medical practices, deployed under:
 
@@ -29,21 +29,39 @@ frontdoor-previews/
 ## Stack
 
 - Static HTML
-- Tailwind CSS via CDN
+- Tailwind CSS compiled at build time
 - Minimal JavaScript
 - Static assets only
 - Hosted on Cloudflare Pages
 
 There is no backend, database, framework build step, or authenticated application code in this repository.
 
+## Content and Build Process
+
+Practice-specific content lives in each practice folder as `practice.json`. The checked-in `index.html` files contain render placeholders that are populated during the build.
+
+Build flow:
+
+```text
+practice.json -> scripts/embed_practice_json.py -> rendered HTML in dist/ -> Cloudflare Pages
+```
+
+`npm run build` runs `scripts/build.sh`, which:
+
+1. Compiles Tailwind CSS.
+2. Verifies each practice with an `index.html` has a valid `practice.json`.
+3. Copies deployable site files into `dist/`.
+4. Embeds `practice.json` content into each built HTML file.
+5. Removes source-only files such as `practice.json`, Markdown files, and build-only artifacts from `dist/`.
+
 ## Cloudflare Pages Deployment
 
-Use the build script so repository-only files such as `AGENTS.md` are not published.
+Use the build script so repository-only files such as `AGENTS.md`, `scripts/`, and `practice.json` are not published.
 
 - Build command: `./scripts/build.sh`
 - Build output directory: `dist`
 
-The build compiles local Tailwind CSS and avoids shipping the Tailwind CDN script in production.
+Cloudflare Pages deploys the generated `dist/` directory.
 
 ## Image Optimization
 
