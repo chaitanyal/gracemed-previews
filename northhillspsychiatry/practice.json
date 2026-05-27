@@ -109,33 +109,31 @@
     {
       "slug": "diana-samuel",
       "name": "Dr. Diana Samuel",
-      "credentials": "Dual focus on Child & Adolescent Psychiatry and Adult Psychiatry",
+      "credentials": "Psychiatric care for children, teens, adults, and families",
       "image": "./images/providers/diana_samuel.webp",
       "specialties": [
         "Children & Teens",
         "Families"
       ],
       "specialty": "Child, Adolescent & Adult Psychiatry",
-      "tagline": "Supportive psychiatric care for children, adolescents, adults, and families navigating emotional health concerns.",
+      "tagline": "Compassionate psychiatric care for children, teens, and families managing anxiety, mood concerns, ADHD, and life stressors.",
       "bioParagraphs": [
-        "Dr. Diana Samuel provides thoughtful, evidence-based care for children, adolescents, and adults across a wide range of mental health conditions",
-        "Her care emphasizes careful listening, clear treatment options, and practical support for mental health at home, school, work, and in relationships."
+        "Dr. Diana Tressa Samuel provides thoughtful, evidence-based psychiatric care tailored specifically for children, adolescents, and young adults. Partnering closely with families, she specializes in managing complex developmental, emotional, and behavioral needs to support long-term growth and well-being."
       ],
       "conditions": [
-        "Child & Adolescent Mental Health",
         "Anxiety",
         "ADHD",
         "Depression",
         "Mood Disorders",
-        "School & Family Stress"
+        "School & Family Stress",
+        "Behavioral Disorders"
       ],
       "services": [
-        "Child & Adolescent Psychiatry",
-        "Adult Psychiatry",
         "Psychiatric Evaluations",
         "Medication Management",
-        "Family Consultation",
-        "Ongoing Psychiatric Care"
+        "Ongoing Treatment Planning",
+        "Child & Adolescent Psychiatric Care",
+        "Family Consultation"
       ],
       "languages": [
         "English"
@@ -146,8 +144,7 @@
         "fellowship": ["University of Texas Southwestern, Dallas, Texas"]
       },
       "certifications": [
-        "Child and Adolescent Psychiatry",
-        "Adult Psychiatry"
+        "Child and Adolescent Psychiatry"
       ],
       "affiliations": [],
       "acceptsNewPatients": true,
@@ -155,13 +152,15 @@
       "phone": "(512) 372-4554",
       "phoneHref": "tel:+15123724554",
       "office": "11615 Angus Road, Suite 225, Austin, TX 78759",
-      "aboutHeading": "Supportive Care for Families, Children, and Teens",
+      "aboutHeading": "Thoughtful Psychiatric Care for Children, Teens, Adults, and Families",
       "whatToExpect": [
-        "Time to understand your child and family",
-        "Clear guidance around medications and treatment options",
-        "Supportive planning for home, school, and daily life"
+        "Time to understand symptoms, history, and family context",
+        "Clear guidance around diagnosis, medication, and next steps",
+        "Practical planning for home, school, and daily routines"
       ],
-      "cardDescription": "Supportive psychiatric care for children, adolescents, adults, and families."
+      "ctaTitle": "Take the next step toward your child’s well-being",
+      "ctaCopy": "Contact our Austin office today to request an initial assessment, verify your insurance benefits, and discuss availability.",
+      "cardDescription": "Compassionate psychiatric care for children, teens, and families managing anxiety, mood concerns, ADHD, and life stressors."
     }
   ],
   "conditionsIntro": "We provide evaluation and ongoing treatment for a range of psychiatric and emotional health concerns.",

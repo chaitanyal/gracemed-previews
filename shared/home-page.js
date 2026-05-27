@@ -159,7 +159,8 @@
   }
 
   function FooterSection({ practice, footer }) {
-    return `<footer class="border-t border-white/60 bg-warm-200 px-6 py-12 lg:px-8"><div class="mx-auto flex max-w-7xl flex-col gap-8 border-t border-white/60 pt-8 md:flex-row md:items-center md:justify-between"><div><p class="text-base font-semibold text-slate-950">${esc(practice.name)}</p><p class="mt-2 text-sm leading-6 text-slate-500">${esc(practice.addressLines.at(-1))} · ${esc(practice.phone)}</p></div><div class="flex gap-6 text-sm font-medium text-slate-600">${footer.links.map(link => `<a class="transition hover:text-slate-950" href="#">${esc(link)}</a>`).join('')}</div></div></footer>`;
+    const address = practice.addressLines.map(line => `<p>${esc(line)}</p>`).join('');
+    return `<footer class="border-t border-white/60 bg-warm-200 px-6 py-12 lg:px-8"><div class="mx-auto flex max-w-7xl flex-col gap-8 border-t border-white/60 pt-8 md:flex-row md:items-center md:justify-between"><div><p class="text-base font-semibold text-slate-950">${esc(practice.name)}</p><div class="mt-2 text-sm leading-6 text-slate-500">${address}<p>${esc(practice.phone)}</p></div></div><div class="flex gap-6 text-sm font-medium text-slate-600">${footer.links.map(link => `<a class="transition hover:text-slate-950" href="#">${esc(link)}</a>`).join('')}</div></div></footer>`;
   }
 
   function StickyMobileCta({ practice, hero }) {
