@@ -20,10 +20,22 @@ Each practice preview lives in its own top-level folder. The folder name is the 
 frontdoor-previews/
   AGENTS.md
   README.md
+  drdronavalli/
+    index.html
+    practice.json
+    images/
+    assets/
   northhillspsychiatry/
     index.html
+    practice.json
     images/
+    assets/
   shared/
+    home-page.js
+    styles/frontdoor.css
+    fonts/
+    logos/
+  scripts/
 ```
 
 ## Stack
@@ -38,21 +50,27 @@ There is no backend, database, framework build step, or authenticated applicatio
 
 ## Content and Build Process
 
-Practice-specific content lives in each practice folder as `practice.json`. The checked-in `index.html` files contain render placeholders that are populated during the build.
+Practice-specific content lives in each practice folder as `practice.json`. Shared homepage rendering lives in `shared/home-page.js`, and shared Tailwind source styles live in `shared/styles/frontdoor.css`. The checked-in `index.html` files contain render placeholders that are populated during the build.
 
 Build flow:
 
 ```text
-practice.json -> scripts/embed_practice_json.py -> rendered HTML in dist/ -> Cloudflare Pages
+practice.json + shared/home-page.js + shared/styles/frontdoor.css
+  -> scripts/generate_provider_pages.py
+  -> scripts/embed_practice_json.py
+  -> rendered HTML/CSS in dist/
+  -> Cloudflare Pages
 ```
 
 `npm run build` runs `scripts/build.sh`, which:
 
-1. Compiles Tailwind CSS.
+1. Compiles Tailwind CSS from `shared/styles/frontdoor.css`.
 2. Verifies each practice with an `index.html` has a valid `practice.json`.
 3. Copies deployable site files into `dist/`.
-4. Embeds `practice.json` content into each built HTML file.
-5. Removes source-only files such as `practice.json`, Markdown files, and build-only artifacts from `dist/`.
+4. Copies compiled CSS into each practice at `assets/styles.css`.
+5. Generates static provider profile pages under `dist/<practice-slug>/providers/<provider-slug>/`.
+6. Embeds `practice.json` content into each built homepage so there is no runtime JSON fetch.
+7. Removes source-only files such as `practice.json`, Markdown files, and build-only artifacts from `dist/`.
 
 ## Cloudflare Pages Deployment
 

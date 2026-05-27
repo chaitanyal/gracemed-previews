@@ -54,17 +54,17 @@
     {
       "slug": "zita-samuel",
       "name": "Dr. Zita Samuel",
-      "credentials": "MD \u00b7 Board Certified Psychiatrist",
+      "credentials": "Board Certified Adult Psychiatrist",
       "image": "./images/providers/zita_samuel.webp",
       "specialties": [
         "ADHD",
         "Anxiety"
       ],
-      "specialty": "Adult Psychiatry",
-      "tagline": "Helping adults navigate anxiety, depression, ADHD, and life transitions with thoughtful psychiatric care.",
+      "specialty": "Adult psychiatric care for anxiety, depression, ADHD, and mood concerns",
+      "tagline": "Adult psychiatric care for anxiety, depression, ADHD, mood concerns, and life transitions.",
       "bioParagraphs": [
-        "Dr. Zita Samuel works with adults to better understand symptoms, stress, and life experiences while creating personalized treatment plans tailored to each individual.",
-        "Previously served as an Assistant Professor at the University of Texas Medical Branch (UTMB), running their emergency department and consultation/liaison psychiatric services"
+        "Dr. Zita Samuel is a board-certified adult psychiatrist specializing in evidence-based care for anxiety, depression, ADHD, and mood disorders. Combining her extensive clinical and academic background, she partners closely with patients to understand their unique symptoms, history, and goals to build practical, effective treatment paths.",
+        "Before joining North Hills Psychiatry, Dr. Samuel served as an Assistant Professor at the University of Texas Medical Branch, where she led emergency psychiatry and consultation-liaison psychiatric services."
       ],
       "conditions": [
         "Anxiety",
@@ -72,15 +72,15 @@
         "Depression",
         "Mood Disorders",
         "Life Transitions",
-        "Medication Questions"
+        "Stress & Burnout"
       ],
       "services": [
         "Psychiatric Evaluations",
         "Medication Management",
-        "Adult Psychiatry",
-        "Adult ADHD Care",
+        "Adult ADHD Evaluation & Treatment",
         "Anxiety & Depression Care",
-        "Ongoing Psychiatric Care"
+        "Mood Disorder Treatment",
+        "Ongoing Treatment Planning"
       ],
       "languages": [
         "English"
@@ -90,7 +90,7 @@
         "residency": ["Loyola University Medical Center, Maywood, IL"]
       },
       "certifications": [
-        "Board Certified, Adult Psychiatry"
+        "Adult Psychiatry"
       ],
       "affiliations": [],
       "acceptsNewPatients": true,
@@ -98,13 +98,15 @@
       "phone": "(512) 372-4554",
       "phoneHref": "tel:+15123724554",
       "office": "11615 Angus Road, Suite 225, Austin, TX 78759",
-      "aboutHeading": "Personalized Psychiatric Care",
+      "aboutHeading": "Personalized Adult Psychiatric Care",
       "whatToExpect": [
-        "Thoughtful conversations tailored to your goals",
-        "Clear guidance around medications and treatment options",
-        "Calm, supportive ongoing care"
+        "Thoughtful conversations tailored to your symptoms, history, and goals",
+        "Clear guidance around diagnosis, medication, and treatment options",
+        "Practical strategies for navigating daily routines and life transitions"
       ],
-      "cardDescription": "Psychiatric care for adults navigating anxiety, depression, ADHD, medication questions, and life transitions."
+      "ctaTitle": "Take the next step toward feeling more like yourself",
+      "ctaCopy": "Contact our Austin office to request an initial adult psychiatry assessment, verify your insurance benefits, and discuss availability.",
+      "cardDescription": "Adult psychiatric care for anxiety, depression, ADHD, mood concerns, and life transitions."
     },
     {
       "slug": "diana-samuel",
