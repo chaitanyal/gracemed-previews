@@ -21,10 +21,18 @@
   },
   "hero": {
     "image": "./images/hero/hero.webp",
+    "imageAlt": "Pulmonary practice hero image",
     "title": "Practical, personalized care for lung health.",
     "copy": "Pulmonary and critical care expertise for patients managing asthma, COPD, sleep apnea, shortness of breath, lung disease, and complex respiratory concerns.",
     "primaryCta": "Request Appointment",
     "secondaryCta": "Meet Dr. Dronavalli"
+  },
+  "home": {
+    "navProvidersLabel": "About",
+    "providerEyebrow": "Physician",
+    "providerTitle": "Meet Dr. Dronavalli",
+    "providerCopy": "Pulmonary and critical care medicine with a practical, personalized approach to lung health.",
+    "insuranceFallback": "Please contact the office to confirm insurance and payment options."
   },
   "trustItems": [
     {
@@ -86,7 +94,12 @@
         "fellowship": ["Baylor College of Medicine"]
       },
       "certifications": [
-        "Pulmonary & Critical Care Specialist"
+        "Pulmonary & Critical Care"
+      ],
+      "heroTrustItems": [
+        "Pulmonary & Critical Care Specialist",
+        "Sleep disorders",
+        "Accepting New Patients"
       ],
       "Hospital Affiliations": [
         "Houston Methodist Hospital", 

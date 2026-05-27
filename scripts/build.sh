@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+rm -rf dist .tmp/frontdoor-build
+mkdir -p dist
 npm run build:css
 
 for practice_dir in ./*/; do
@@ -19,19 +21,10 @@ for practice_dir in ./*/; do
   fi
 done
 
-for practice_dir in ./*/; do
-  if [[ -f "${practice_dir}index.html" && -d "${practice_dir}assets" && "${practice_dir}" != "./northhillspsychiatry/" ]]; then
-    cp ./northhillspsychiatry/assets/styles.css "${practice_dir}assets/styles.css"
-  fi
-done
-
-rm -rf dist
-mkdir -p dist
-
 for item in ./*; do
   name="$(basename "$item")"
   case "$name" in
-    AGENTS.md|README.md|wrangler.toml|githooks|scripts|templates|dist|node_modules|package.json|package-lock.json|tailwind.config.js)
+    AGENTS.md|README.md|wrangler.toml|githooks|scripts|templates|dist|node_modules|package.json|package-lock.json|tailwind.config.js|.tmp)
       continue
       ;;
   esac
@@ -39,10 +32,16 @@ for item in ./*; do
   cp -R "$item" dist/
 done
 
+for practice_dir in dist/*/; do
+  if [[ -f "${practice_dir}index.html" && -d "${practice_dir}assets" ]]; then
+    cp ./.tmp/frontdoor-build/styles.css "${practice_dir}assets/styles.css"
+  fi
+done
+
 python3 scripts/generate_provider_pages.py
 python3 scripts/embed_practice_json.py
 
-rm -rf dist/shared/styles
+rm -rf dist/shared/styles .tmp/frontdoor-build
 find dist -name '*.md' -type f -delete
 find dist -name 'practice.json' -type f -delete
 find dist -name '.DS_Store' -type f -delete

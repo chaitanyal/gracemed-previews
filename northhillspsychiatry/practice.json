@@ -21,10 +21,16 @@
   },
   "hero": {
     "image": "./images/hero/Austin_Hero_Image.webp",
+    "imageAlt": "Austin skyline at sunset",
     "title": "Care that starts with understanding.",
     "copy": "Psychiatric care for adults and families navigating anxiety, ADHD, depression, and life transitions with thoughtful, individualized treatment.",
     "primaryCta": "Request Appointment",
     "secondaryCta": "Meet Our Providers"
+  },
+  "home": {
+    "providerEyebrow": "Providers",
+    "providerTitle": "Meet the care team",
+    "providerCopy": "Warm, evidence-based psychiatric care with a calm first step into treatment."
   },
   "trustItems": [
     {
@@ -218,6 +224,7 @@
     "officeImageAlt": "North Hills Psychiatry office entrance",
     "directionsHref": "https://maps.google.com",
     "timeZone": "America/Chicago",
+    "telehealthNotice": "Telehealth appointments available throughout Texas.",
     "hours": [
       [
         "Monday",
