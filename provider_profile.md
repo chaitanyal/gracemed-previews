@@ -288,12 +288,11 @@ Display as:
 - stacked cards,
 - or structured list.
 
-Include:
-- Undergraduate
-- Medical School
-- Residency
-- Fellowship
-- Board Certification
+Always list in this order:
+1. Board Certification
+2. Medical School
+3. Residency
+4. Fellowship
 
 Must be visually scannable.
 
