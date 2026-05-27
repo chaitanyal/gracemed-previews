@@ -186,7 +186,6 @@ def provider_page(config: dict[str, Any], provider: dict[str, Any], practice_slu
           <div class="soft-card gentle-gradient p-7 md:p-10">
             <h1 class="text-4xl font-semibold leading-tight tracking-tight text-slate-950 md:text-6xl">{esc(name)}</h1>
             <p class="mt-3 text-lg font-semibold text-brand-primary">{esc(provider.get('credentials'))}</p>
-            <p class="mt-2 text-xl leading-8 text-slate-700">{esc(specialty)}</p>
             <p class="mt-6 max-w-2xl text-lg leading-8 text-slate-700">{esc(provider.get('tagline') or provider.get('cardDescription') or description)}</p>
             <div class="mt-7 flex flex-wrap gap-2">{chips(hero_trust_items(config, provider), 'inline-flex rounded-full bg-white/85 px-4 py-2 text-sm font-semibold text-slate-700 shadow-sm')}</div>
             <div class="mt-8 flex flex-col gap-3 sm:flex-row"><a href="#appointment" class="btn-primary">Book Appointment</a><a href="{esc(phone_href)}" class="btn-secondary">Call Office</a></div>
