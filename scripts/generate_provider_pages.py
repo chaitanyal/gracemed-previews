@@ -43,6 +43,15 @@ def list_cards(values: list[str] | None) -> str:
     )
 
 
+def care_steps(values: list[str] | None) -> str:
+    return "".join(
+        f'<li class="flex gap-3 text-base leading-7 text-slate-700 md:text-lg md:leading-8">'
+        f'<span class="mt-2 h-2 w-2 shrink-0 rounded-full bg-brand-accent" aria-hidden="true"></span>'
+        f'<span>{esc(value)}</span></li>'
+        for value in (values or [])
+    )
+
+
 def is_psychiatry(config: dict[str, Any], provider: dict[str, Any]) -> bool:
     haystack = " ".join([
         provider.get("specialty", ""),
@@ -144,9 +153,9 @@ def provider_page(config: dict[str, Any], provider: dict[str, Any], practice_slu
     about_heading = provider.get("aboutHeading") or ("Personalized Psychiatric Care" if is_psychiatry(config, provider) else "Individualized Pulmonary Care")
     affiliation_section = ""
     if hospital_affiliations:
-        affiliation_section = f'''\n    <section class="section border-t border-white/60 bg-[#F8F7F4]"><div class="section-shell max-w-5xl"><div class="soft-card p-7 md:p-8"><h2 class="text-3xl font-semibold leading-tight tracking-tight text-slate-950 md:text-5xl">Hospital Affiliations</h2><ul class="mt-7 grid grid-cols-1 gap-3 md:grid-cols-2">{list_cards(hospital_affiliations)}</ul></div></div></section>'''
+        affiliation_section = f'''\n    <section class="bg-[#F8F7F4] px-6 py-14 md:py-20 lg:px-8"><div class="mx-auto max-w-5xl"><div class="soft-card p-7 md:p-8"><h2 class="text-3xl font-semibold leading-tight tracking-tight text-slate-950 md:text-5xl">Hospital Affiliations</h2><ul class="mt-7 grid grid-cols-1 gap-3 md:grid-cols-2">{list_cards(hospital_affiliations)}</ul></div></div></section>'''
     elif professional_credentials and not is_psychiatry(config, provider):
-        affiliation_section = f'''\n    <section class="section border-t border-white/60 bg-[#F8F7F4]"><div class="section-shell max-w-5xl"><div class="soft-card p-7 md:p-8"><h2 class="text-3xl font-semibold leading-tight tracking-tight text-slate-950 md:text-5xl">Professional Affiliations</h2><ul class="mt-7 grid grid-cols-1 gap-3 md:grid-cols-2">{list_cards(professional_credentials)}</ul></div></div></section>'''
+        affiliation_section = f'''\n    <section class="bg-[#F8F7F4] px-6 py-14 md:py-20 lg:px-8"><div class="mx-auto max-w-5xl"><div class="soft-card p-7 md:p-8"><h2 class="text-3xl font-semibold leading-tight tracking-tight text-slate-950 md:text-5xl">Professional Affiliations</h2><ul class="mt-7 grid grid-cols-1 gap-3 md:grid-cols-2">{list_cards(professional_credentials)}</ul></div></div></section>'''
 
     schema = {
         "@context": "https://schema.org",
@@ -196,10 +205,11 @@ def provider_page(config: dict[str, Any], provider: dict[str, Any], practice_slu
         </div>
       </div>
     </section>
-    <section class="border-t border-white/60 bg-[#FAF8F6] px-6 py-10 md:py-14 lg:px-8"><div class="mx-auto grid max-w-7xl grid-cols-1 gap-10 lg:grid-cols-2"><div><h2 class="text-3xl font-semibold leading-tight tracking-tight text-slate-950 md:text-5xl">Conditions Treated</h2><ul class="mt-6 grid grid-cols-1 gap-3">{list_cards(conditions)}</ul></div><div><h2 class="text-3xl font-semibold leading-tight tracking-tight text-slate-950 md:text-5xl">Treatment Services</h2><ul class="mt-6 grid grid-cols-1 gap-3">{list_cards(services)}</ul></div></div></section>
-    <section class="border-t border-white/60 bg-white px-6 py-10 md:py-14 lg:px-8"><div class="mx-auto max-w-5xl"><h2 class="max-w-3xl text-3xl font-semibold leading-tight tracking-tight text-slate-950 md:text-5xl">{esc(about_heading)}</h2><div class="mt-6 max-w-4xl space-y-4 text-lg leading-8 text-slate-700 md:text-xl md:leading-9">{"".join(f'<p>{esc(p)}</p>' for p in bio_paragraphs[:2])}</div><ul class="mt-7 grid max-w-4xl grid-cols-1 gap-3 md:grid-cols-3">{list_cards(expectations)}</ul></div></section>
-    <section class="border-t border-white/60 bg-white px-6 py-10 md:py-14 lg:px-8"><div class="mx-auto max-w-5xl"><h2 class="text-3xl font-semibold leading-tight tracking-tight text-slate-950 md:text-5xl">Education &amp; Training</h2><div class="mt-7 grid grid-cols-1 gap-4 md:grid-cols-2">{education_rows(provider) or '<div class="soft-card p-6 text-lg leading-8 text-slate-700">Please contact the office for additional training details.</div>'}</div></div></section>{affiliation_section}
-    <section id="appointment" class="section relative overflow-hidden border-t border-white/60 bg-gradient-to-br from-brand-900 via-brand-800 to-brand-primary"><div class="section-shell grid grid-cols-1 gap-8 lg:grid-cols-2 lg:items-center"><div><p class="text-sm font-semibold uppercase tracking-wide text-sage-100">Request care</p><h2 class="mt-4 text-3xl font-semibold leading-tight tracking-tight text-white md:text-5xl">{esc(cta_title)}</h2><p class="mt-6 text-lg leading-8 text-slate-300">{esc(cta_copy)}</p></div><div class="soft-card bg-white/95 p-7"><p class="text-lg font-semibold text-slate-950">{esc(practice['name'])}</p><div class="mt-3 text-base leading-7 text-slate-600">{office_html}</div><div class="mt-6 flex flex-col gap-3 sm:flex-row"><a href="{esc(phone_href)}" class="btn-primary">{esc(phone)}</a><a href="../../#contact" class="btn-secondary">Request Appointment</a></div>{'<p class="mt-4 text-sm font-semibold text-brand-accent">Telehealth available</p>' if provider.get('telehealth') is True else ''}</div></div></section>
+    <section class="bg-white px-6 py-14 md:py-24 lg:px-8"><div class="mx-auto max-w-5xl"><h2 class="max-w-3xl text-3xl font-semibold leading-tight tracking-tight text-slate-950 md:text-5xl">{esc(about_heading)}</h2><div class="mt-7 max-w-4xl space-y-5 text-lg leading-9 text-slate-700 md:text-xl md:leading-10">{"".join(f'<p>{esc(p)}</p>' for p in bio_paragraphs[:2])}</div><div class="mt-10 max-w-4xl rounded-[28px] bg-[#FAF8F6] p-6 md:p-8"><h3 class="text-xl font-semibold tracking-tight text-slate-950 md:text-2xl">How Dr. {esc(name.split()[-1])} helps</h3><ul class="mt-5 space-y-4">{care_steps(expectations)}</ul></div></div></section>
+    <section class="bg-[#FAF8F6] px-6 py-14 md:py-20 lg:px-8"><div class="mx-auto max-w-6xl"><h2 class="text-3xl font-semibold leading-tight tracking-tight text-slate-950 md:text-5xl">Conditions Treated</h2><ul class="mt-7 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">{list_cards(conditions)}</ul></div></section>
+    <section class="bg-white px-6 py-14 md:py-20 lg:px-8"><div class="mx-auto max-w-6xl"><h2 class="text-3xl font-semibold leading-tight tracking-tight text-slate-950 md:text-5xl">Treatment Services</h2><ul class="mt-7 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">{list_cards(services)}</ul></div></section>
+    <section class="bg-[#FAF8F6] px-6 py-14 md:py-20 lg:px-8"><div class="mx-auto max-w-5xl"><h2 class="text-3xl font-semibold leading-tight tracking-tight text-slate-950 md:text-5xl">Education &amp; Training</h2><div class="mt-7 grid grid-cols-1 gap-4 md:grid-cols-2">{education_rows(provider) or '<div class="soft-card p-6 text-lg leading-8 text-slate-700">Please contact the office for additional training details.</div>'}</div></div></section>{affiliation_section}
+    <section id="appointment" class="relative overflow-hidden bg-gradient-to-br from-brand-900 via-brand-800 to-brand-primary px-6 py-16 md:py-24 lg:px-8"><div class="mx-auto grid max-w-7xl grid-cols-1 gap-8 lg:grid-cols-2 lg:items-center"><div><p class="text-sm font-semibold uppercase tracking-wide text-sage-100">Request care</p><h2 class="mt-4 text-3xl font-semibold leading-tight tracking-tight text-white md:text-5xl">{esc(cta_title)}</h2><p class="mt-6 text-lg leading-8 text-slate-300">{esc(cta_copy)}</p></div><div class="soft-card bg-white/95 p-7"><p class="text-lg font-semibold text-slate-950">{esc(practice['name'])}</p><div class="mt-3 text-base leading-7 text-slate-600">{office_html}</div><div class="mt-6 flex flex-col gap-3 sm:flex-row"><a href="{esc(phone_href)}" class="btn-primary">{esc(phone)}</a><a href="../../#contact" class="btn-secondary">Request Appointment</a></div>{'<p class="mt-4 text-sm font-semibold text-brand-accent">Telehealth available</p>' if provider.get('telehealth') is True else ''}</div></div></section>
   </main>
   <div class="fixed inset-x-0 bottom-0 z-50 border-t border-white/60 bg-white/90 p-3 shadow-[0_-10px_30px_rgba(15,23,42,0.08)] backdrop-blur md:hidden"><div class="mx-auto grid max-w-md grid-cols-2 gap-3"><a href="#appointment" class="btn-primary min-h-[44px] px-3 py-2 text-sm">Book Appointment</a><a href="{esc(phone_href)}" class="btn-secondary min-h-[44px] px-3 py-2 text-sm">Call Office</a></div></div>
   <script type="application/ld+json">{json.dumps(schema).replace('<', '\\u003c')}</script>
