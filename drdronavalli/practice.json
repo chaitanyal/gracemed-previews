@@ -56,7 +56,7 @@
     {
       "slug": "goutham-dronavalli",
       "name": "Dr. Goutham Dronavalli",
-      "credentials": "Pulmonary & Critical Care Medicine",
+      "heroTitle": "Expert Pulmonary & Sleep Care.",
       "image": "./images/providers/goutham_dronavalli.webp",
       "specialties": [
         "Pulmonary disease",
@@ -98,7 +98,7 @@
       ],
       "heroTrustItems": [
         "Pulmonary & Critical Care Specialist",
-        "Sleep disorders",
+        "Sleep Disorders Specialist",
         "Accepting New Patients"
       ],
       "Hospital Affiliations": [

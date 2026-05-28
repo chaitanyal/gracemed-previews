@@ -120,7 +120,9 @@ def provider_page(config: dict[str, Any], provider: dict[str, Any], practice_slu
     theme = THEMES.get(config.get("theme"), THEMES["psychiatry"])
     name = provider.get("name", "Provider")
     title = f"{name} | {practice['name']}"
+    hero_title = provider.get("heroTitle") or ""
     description = provider.get("tagline") or provider.get("cardDescription") or config.get("seo", {}).get("description", "")
+    hero_title_html = f'<p class="mt-3 text-lg font-semibold text-brand-primary">{esc(hero_title)}</p>' if hero_title else ""
     conditions = (provider.get("conditions") or provider.get("specialties") or config.get("conditions", []))[:6]
     services = (provider.get("services") or ["Evaluation", "Treatment Planning", "Ongoing Care"])[:6]
     bio_paragraphs = provider.get("bioParagraphs") or []
@@ -186,7 +188,7 @@ def provider_page(config: dict[str, Any], provider: dict[str, Any], practice_slu
           <div class="mx-auto w-full max-w-md lg:max-w-none"><div class="aspect-[4/5] overflow-hidden rounded-[36px] bg-white shadow-soft"><img src="{esc(rel(provider.get('image')))}" alt="Portrait of {esc(name)}" class="image-treatment h-full w-full object-cover object-top" width="720" height="900" /></div></div>
           <div class="soft-card gentle-gradient p-7 md:p-10">
             <h1 class="text-4xl font-semibold leading-tight tracking-tight text-slate-950 md:text-6xl">{esc(name)}</h1>
-            <p class="mt-3 text-lg font-semibold text-brand-primary">{esc(provider.get('credentials'))}</p>
+            {hero_title_html}
             <p class="mt-6 max-w-2xl text-lg leading-8 text-slate-700">{esc(provider.get('tagline') or provider.get('cardDescription') or description)}</p>
             <div class="mt-7 flex flex-wrap gap-2">{chips(hero_trust_items(config, provider), 'inline-flex rounded-full bg-white/85 px-4 py-2 text-sm font-semibold text-slate-700 shadow-sm')}</div>
             <div class="mt-8 flex flex-col gap-3 sm:flex-row"><a href="#appointment" class="btn-primary">Book Appointment</a><a href="{esc(phone_href)}" class="btn-secondary">Call Office</a></div>
