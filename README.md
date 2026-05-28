@@ -21,15 +21,15 @@ frontdoor-previews/
   AGENTS.md
   README.md
   drdronavalli/
-    index.html
-    practice.json
+    index.html      # shared render shell
+    practice.json   # practice + provider content
     images/
-    assets/
+    assets/fonts/
   northhillspsychiatry/
-    index.html
-    practice.json
+    index.html      # shared render shell
+    practice.json   # practice + provider content
     images/
-    assets/
+    assets/fonts/
   shared/
     home-page.js
     styles/frontdoor.css
@@ -50,7 +50,7 @@ There is no backend, database, framework build step, or authenticated applicatio
 
 ## Content and Build Process
 
-Practice-specific content lives in each practice folder as `practice.json`. Shared homepage rendering lives in `shared/home-page.js`, and shared Tailwind source styles live in `shared/styles/frontdoor.css`. The checked-in `index.html` files contain render placeholders that are populated during the build.
+Practice-specific content lives in each practice folder as `practice.json`. Shared homepage rendering lives in `shared/home-page.js`, provider profile rendering lives in `scripts/generate_provider_pages.py`, and shared Tailwind source styles live in `shared/styles/frontdoor.css`. The checked-in practice `index.html` files are generic render shells; practice-specific metadata and page content come from `practice.json` during the build.
 
 Build flow:
 
@@ -67,10 +67,11 @@ practice.json + shared/home-page.js + shared/styles/frontdoor.css
 1. Compiles Tailwind CSS from `shared/styles/frontdoor.css`.
 2. Verifies each practice with an `index.html` has a valid `practice.json`.
 3. Copies deployable site files into `dist/`.
-4. Copies compiled CSS into each practice at `assets/styles.css`.
-5. Generates static provider profile pages under `dist/<practice-slug>/providers/<provider-slug>/`.
+4. Creates each practice `assets/` directory in `dist/`, copies compiled CSS to `assets/styles.css`, and copies shared fonts to `assets/fonts/`.
+5. Generates static provider profile pages under `dist/<practice-slug>/providers/<provider-slug>/` from provider data in `practice.json`.
 6. Embeds `practice.json` content into each built homepage so there is no runtime JSON fetch.
-7. Removes source-only files such as `practice.json`, Markdown files, and build-only artifacts from `dist/`.
+7. Replaces generic shell metadata with `seo.title` and `seo.description` from `practice.json`.
+8. Removes source-only files such as `practice.json`, Markdown files, and build-only artifacts from `dist/`.
 
 ## Cloudflare Pages Deployment
 
@@ -96,6 +97,10 @@ The script scans source `images/` folders, skips SVG/WebP files, and ignores gen
 - Use relative asset paths, because previews are served from subpaths.
 - Keep previews mobile-first and accessible.
 - Prefer optimized JPG/WebP images and SVG logos.
+- Drive practice and provider-specific content from `practice.json`; avoid one-off HTML/CSS edits per practice or provider.
+- Keep templates opinionated. Add new JSON knobs only when they are reusable across practices.
+- Provider profile UI labels have defaults in `scripts/generate_provider_pages.py` and can be overridden with `providerProfileLabels` in `practice.json` when needed.
+- Treat per-practice `assets/styles.css` as a build output, not source. Shared CSS source lives in `shared/styles/frontdoor.css`.
 - Avoid production healthcare portal behavior or HIPAA-sensitive workflows in these previews.
 
 See `AGENTS.md` for repository-specific implementation guidelines.

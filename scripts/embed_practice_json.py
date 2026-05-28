@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import json
+from html import escape
 from pathlib import Path
 
 
@@ -44,6 +45,11 @@ def embed_practice_config(practice_dir: Path) -> None:
         f"    const practiceConfig = {config_js};\n",
     )
     html = html.replace(RENDER_SNIPPET, "    FrontdoorHome.render(practiceConfig);\n")
+    html = html.replace("<title>FrontDoor Health Preview</title>", f"<title>{escape(config['seo']['title'])}</title>")
+    html = html.replace(
+        '<meta name="description" content="Static healthcare practice preview." />',
+        f'<meta name="description" content="{escape(config["seo"]["description"], quote=True)}" />',
+    )
 
     index_path.write_text(html)
     json_path.unlink()

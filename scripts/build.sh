@@ -33,8 +33,10 @@ for item in ./*; do
 done
 
 for practice_dir in dist/*/; do
-  if [[ -f "${practice_dir}index.html" && -d "${practice_dir}assets" ]]; then
+  if [[ -f "${practice_dir}index.html" ]]; then
+    mkdir -p "${practice_dir}assets/fonts"
     cp ./.tmp/frontdoor-build/styles.css "${practice_dir}assets/styles.css"
+    cp ./shared/fonts/* "${practice_dir}assets/fonts/"
   fi
 done
 
