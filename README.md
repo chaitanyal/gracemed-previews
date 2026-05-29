@@ -14,29 +14,44 @@ https://preview.frontdoor.health/northhillspsychiatry
 
 ## Repository Structure
 
-Each practice preview lives in its own top-level folder. The folder name is the deployed URL slug.
+Practice preview source files live under `sites/`. The folder name becomes the deployed preview URL slug, but the build still outputs each practice at the root of `dist/` to preserve existing URLs.
 
 ```text
 frontdoor-previews/
-  AGENTS.md
-  README.md
-  drdronavalli/
-    index.html      # shared render shell
-    practice.json   # practice + provider content
-    images/
-    assets/fonts/
-  northhillspsychiatry/
-    index.html      # shared render shell
-    practice.json   # practice + provider content
-    images/
-    assets/fonts/
+  index.html                 # FrontDoor preview landing page
+  sites/
+    template/                # starter structure for new practices
+    drdronavalli/
+      index.html             # shared render shell
+      practice.json          # practice + provider content
+      images/
+      assets/fonts/
+    northhillspsychiatry/
+      index.html
+      practice.json
+      images/
+      assets/fonts/
+  stories/                   # FrontDoor marketing/case-study content
+    drdronavalli/
+      index.html
+      images/assets
   shared/
     home-page.js
     styles/frontdoor.css
     fonts/
     logos/
   scripts/
+  templates/
+  dist/
 ```
+
+New practices can be started with:
+
+```bash
+cp -R sites/template sites/newpractice
+```
+
+Then update `sites/newpractice/practice.json`, content, providers, and assets. No build script changes should be required.
 
 ## Stack
 
@@ -50,12 +65,12 @@ There is no backend, database, framework build step, or authenticated applicatio
 
 ## Content and Build Process
 
-Practice-specific content lives in each practice folder as `practice.json`. Shared homepage rendering lives in `shared/home-page.js`, provider profile rendering lives in `scripts/generate_provider_pages.py`, and shared Tailwind source styles live in `shared/styles/frontdoor.css`. The checked-in practice `index.html` files are generic render shells; practice-specific metadata and page content come from `practice.json` during the build.
+Practice-specific content lives in each `sites/<practice-slug>/practice.json`. Shared homepage rendering lives in `shared/home-page.js`, provider profile rendering lives in `scripts/generate_provider_pages.py`, and shared Tailwind source styles live in `shared/styles/frontdoor.css`. The checked-in practice `index.html` files are generic render shells; practice-specific metadata and page content come from `practice.json` during the build.
 
 Build flow:
 
 ```text
-practice.json + shared/home-page.js + shared/styles/frontdoor.css
+sites/<practice>/practice.json + shared/home-page.js + shared/styles/frontdoor.css
   -> scripts/generate_provider_pages.py
   -> scripts/embed_practice_json.py
   -> rendered HTML/CSS in dist/
@@ -65,13 +80,25 @@ practice.json + shared/home-page.js + shared/styles/frontdoor.css
 `npm run build` runs `scripts/build.sh`, which:
 
 1. Compiles Tailwind CSS from `shared/styles/frontdoor.css`.
-2. Verifies each practice with an `index.html` has a valid `practice.json`.
-3. Copies deployable site files into `dist/`.
-4. Creates each practice `assets/` directory in `dist/`, copies compiled CSS to `assets/styles.css`, and copies shared fonts to `assets/fonts/`.
-5. Generates static provider profile pages under `dist/<practice-slug>/providers/<provider-slug>/` from provider data in `practice.json`.
-6. Embeds `practice.json` content into each built homepage so there is no runtime JSON fetch.
-7. Replaces generic shell metadata with `seo.title` and `seo.description` from `practice.json`.
-8. Removes source-only files such as `practice.json`, Markdown files, and build-only artifacts from `dist/`.
+2. Copies the root preview landing page and shared assets into `dist/`.
+3. Verifies each practice in `sites/` with an `index.html` has a valid `practice.json`.
+4. Copies each practice from `sites/<practice-slug>/` to `dist/<practice-slug>/`, preserving preview URLs.
+5. Copies stories from `stories/<story-slug>/` to `dist/stories/<story-slug>/`.
+6. Creates each practice `assets/` directory in `dist/`, copies compiled CSS to `assets/styles.css`, and copies shared fonts to `assets/fonts/`.
+7. Generates static provider profile pages under `dist/<practice-slug>/providers/<provider-slug>/` from provider data in `practice.json`.
+8. Embeds `practice.json` content into each built homepage so there is no runtime JSON fetch.
+9. Replaces generic shell metadata with `seo.title` and `seo.description` from `practice.json`.
+10. Removes source-only files such as `practice.json`, Markdown files, and build-only artifacts from `dist/`.
+
+Resulting preview output:
+
+```text
+dist/
+  drdronavalli/
+  northhillspsychiatry/
+  stories/
+    drdronavalli/
+```
 
 ## Cloudflare Pages Deployment
 

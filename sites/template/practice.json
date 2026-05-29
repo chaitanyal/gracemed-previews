@@ -1,0 +1,111 @@
+{
+  "theme": "psychiatry",
+  "seo": {
+    "title": "Practice Name | Specialty Care in City",
+    "description": "Patient-centered specialty care for adults and families in City, State.",
+    "ogImage": "./images/hero/hero.webp"
+  },
+  "practice": {
+    "name": "Practice Name",
+    "tagline": "Compassionate Specialty Care",
+    "locationLabel": "Located in City, State",
+    "phone": "(555) 555-5555",
+    "phoneHref": "tel:+15555555555",
+    "email": "frontdesk@examplepractice.com",
+    "addressLines": [
+      "123 Main Street",
+      "Suite 100",
+      "City, ST 12345"
+    ],
+    "socialLinks": []
+  },
+  "hero": {
+    "image": "./images/hero/hero.webp",
+    "title": "Care that starts with understanding.",
+    "copy": "Clear, patient-centered care for people seeking thoughtful support, practical next steps, and a calmer healthcare experience.",
+    "primaryCta": "Request Appointment",
+    "secondaryCta": "Meet the Provider"
+  },
+  "trustItems": [
+    { "icon": "ShieldCheck", "text": "Insurance accepted" },
+    { "icon": "Video", "text": "Telehealth available" },
+    { "icon": "CalendarCheck", "text": "New patients welcome" },
+    { "icon": "MapPin", "text": "Convenient local office" }
+  ],
+  "providers": [
+    {
+      "slug": "provider-name",
+      "name": "Dr. Provider Name",
+      "credentials": "MD · Specialty",
+      "image": "./images/providers/provider-name.webp",
+      "specialties": ["Specialty Area", "Patient Focus"],
+      "philosophy": "A short statement about the provider's clinical focus and approach.",
+      "bio": "A concise provider bio describing training, care style, and patient population."
+    }
+  ],
+  "conditionsIntro": "We provide evaluation and ongoing care for a range of health concerns.",
+  "conditions": [
+    "Condition or Service 1",
+    "Condition or Service 2",
+    "Condition or Service 3",
+    "Condition or Service 4",
+    "Condition or Service 5",
+    "Condition or Service 6"
+  ],
+  "insurance": {
+    "title": "Insurance and payment options",
+    "plans": [
+      { "name": "Blue Cross Blue Shield", "logo": "../shared/logos/bcbstx-logo.svg" },
+      { "name": "Cigna Healthcare", "logo": "../shared/logos/cignahlthcr.svg" },
+      { "name": "UnitedHealthcare", "logo": "../shared/logos/UHC.svg" },
+      { "name": "Aetna", "logo": "../shared/logos/aetna.svg" }
+    ]
+  },
+  "faqs": [
+    {
+      "question": "Do you offer telehealth appointments?",
+      "answer": "Yes. Telehealth may be available depending on patient needs, provider availability, and state requirements."
+    },
+    {
+      "question": "Do you accept insurance?",
+      "answer": "The office can help confirm accepted plans, benefits, and any next steps before your first visit."
+    },
+    {
+      "question": "How do I request an appointment?",
+      "answer": "Submit the appointment request form or call the office. The team will follow up with availability and next steps."
+    }
+  ],
+  "contact": {
+    "eyebrow": "Start care",
+    "title": "Ready to get started?",
+    "copy": "Request an appointment and the office will follow up with next steps, availability, and insurance information.",
+    "disclaimer": "The office typically responds within 1 business day."
+  },
+  "location": {
+    "title": "Conveniently located in City",
+    "officeImage": "./images/office/office.webp",
+    "officeImageAlt": "Practice office entrance",
+    "directionsHref": "https://maps.google.com",
+    "timeZone": "America/New_York",
+    "hours": [
+      ["Monday", "8:00 AM – 5:00 PM"],
+      ["Tuesday", "8:00 AM – 5:00 PM"],
+      ["Wednesday", "8:00 AM – 5:00 PM"],
+      ["Thursday", "8:00 AM – 5:00 PM"],
+      ["Friday", "8:00 AM – 3:00 PM"],
+      ["Saturday–Sunday", "Closed"]
+    ],
+    "weeklyHours": {
+      "Monday": { "open": "08:00", "close": "17:00" },
+      "Tuesday": { "open": "08:00", "close": "17:00" },
+      "Wednesday": { "open": "08:00", "close": "17:00" },
+      "Thursday": { "open": "08:00", "close": "17:00" },
+      "Friday": { "open": "08:00", "close": "15:00" },
+      "Saturday": { "closed": true },
+      "Sunday": { "closed": true }
+    }
+  },
+  "footer": {
+    "links": ["Privacy", "Accessibility", "Contact"]
+  }
+}
