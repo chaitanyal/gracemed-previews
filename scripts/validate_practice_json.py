@@ -72,6 +72,42 @@ def validate_labeled_string_list(value: Any, path: str, *, min_items: int = 0) -
         require_string(pair[1], f"{path}[{index}][1]")
 
 
+def validate_financial_policy(value: Any) -> None:
+    policy = require_mapping(value, "financialPolicy")
+    payment_model = require_string_key(policy, "paymentModel", "financialPolicy")
+    if payment_model not in {"insurance", "out_of_network", "cash_only", "hybrid"}:
+        fail("financialPolicy.paymentModel must be one of insurance, out_of_network, cash_only, hybrid")
+    pricing_display = require_string_key(policy, "pricingDisplay", "financialPolicy")
+    if pricing_display not in {"hidden", "contact_for_rates", "published"}:
+        fail("financialPolicy.pricingDisplay must be one of hidden, contact_for_rates, published")
+
+    if "insurancePlans" in policy:
+        plans = require_list(policy["insurancePlans"], "financialPolicy.insurancePlans")
+        for index, plan_value in enumerate(plans):
+            if isinstance(plan_value, str):
+                require_string(plan_value, f"financialPolicy.insurancePlans[{index}]")
+                continue
+            plan = require_mapping(plan_value, f"financialPolicy.insurancePlans[{index}]")
+            require_string_key(plan, "name", f"financialPolicy.insurancePlans[{index}]")
+            if "logo" in plan:
+                validate_asset_path(plan["logo"], f"financialPolicy.insurancePlans[{index}].logo")
+    if "paymentMethods" in policy:
+        validate_string_list(policy["paymentMethods"], "financialPolicy.paymentMethods")
+    if "superbillAvailable" in policy and not isinstance(policy["superbillAvailable"], bool):
+        fail("financialPolicy.superbillAvailable must be a boolean")
+    if "contactForRatesMessage" in policy:
+        require_string(policy["contactForRatesMessage"], "financialPolicy.contactForRatesMessage")
+    if "rates" in policy:
+        rates = require_list(policy["rates"], "financialPolicy.rates")
+        for index, rate_value in enumerate(rates):
+            rate = require_mapping(rate_value, f"financialPolicy.rates[{index}]")
+            require_string_key(rate, "name", f"financialPolicy.rates[{index}]")
+            if "durationMinutes" in rate and not isinstance(rate["durationMinutes"], int):
+                fail(f"financialPolicy.rates[{index}].durationMinutes must be an integer")
+            if "price" not in rate or not isinstance(rate["price"], (int, float)):
+                fail(f"financialPolicy.rates[{index}].price must be a number")
+
+
 def validate_practice_config(config: dict[str, Any], source: Path) -> None:
     seo = require_mapping(require_key(config, "seo", "root"), "seo")
     require_string_key(seo, "title", "seo")
@@ -99,6 +135,9 @@ def validate_practice_config(config: dict[str, Any], source: Path) -> None:
 
     validate_string_list(require_key(config, "conditions", "root"), "conditions", min_items=1)
     require_string_key(config, "conditionsIntro", "root")
+
+    if "financialPolicy" in config:
+        validate_financial_policy(config["financialPolicy"])
 
     insurance = require_mapping(require_key(config, "insurance", "root"), "insurance")
     require_string_key(insurance, "title", "insurance")

@@ -22,7 +22,7 @@
   "hero": {
     "image": "./images/hero/hero.webp",
     "imageAlt": "Pulmonary practice hero image",
-    "title": "Practical, personalized care for lung health.",
+    "title": "Breathe easier with expert pulmonary care.",
     "copy": "Pulmonary and critical care expertise for patients managing asthma, COPD, sleep apnea, shortness of breath, lung disease, and complex respiratory concerns.",
     "primaryCta": "Request Appointment",
     "secondaryCta": "Meet Dr. Dronavalli"
@@ -90,8 +90,12 @@
       ],
       "education": {
         "medicalSchool": "Kasturba Medical College, Manipal, India",
-        "residency": ["East Tennessee Medical University"],
-        "fellowship": ["Baylor College of Medicine"]
+        "residency": [
+          "East Tennessee Medical University"
+        ],
+        "fellowship": [
+          "Baylor College of Medicine"
+        ]
       },
       "certifications": [
         "Pulmonary & Critical Care"
@@ -102,8 +106,8 @@
         "Accepting New Patients"
       ],
       "Hospital Affiliations": [
-        "Houston Methodist Hospital", 
-        "Memorial Hermann Texas Medical Center", 
+        "Houston Methodist Hospital",
+        "Memorial Hermann Texas Medical Center",
         "Baylor St. Luke’s Medical Center"
       ],
       "acceptsNewPatients": true,
@@ -114,7 +118,7 @@
       "acceptedInsurances": [
         "Aetna Health Plans",
         "Anthem Blue Cross and Blue Shield",
-        "Blue Cross and Blue Shield \u2013 Texas",
+        "Blue Cross and Blue Shield – Texas",
         "Cigna"
       ],
       "externalProfileUrl": "https://healow.com/apps/provider/goutham-dronavalli-3201534",
@@ -199,26 +203,26 @@
     "hours": [
       [
         "Monday",
-        "9:00 AM \u2013 5:00 PM"
+        "9:00 AM – 5:00 PM"
       ],
       [
         "Tuesday",
-        "9:00 AM \u2013 5:00 PM"
+        "9:00 AM – 5:00 PM"
       ],
       [
         "Wednesday",
-        "9:00 AM \u2013 5:00 PM"
+        "9:00 AM – 5:00 PM"
       ],
       [
         "Thursday",
-        "9:00 AM \u2013 5:00 PM"
+        "9:00 AM – 5:00 PM"
       ],
       [
         "Friday",
-        "9:00 AM \u2013 5:00 PM"
+        "9:00 AM – 5:00 PM"
       ],
       [
-        "Saturday\u2013Sunday",
+        "Saturday–Sunday",
         "Closed"
       ]
     ],
@@ -256,6 +260,32 @@
       "Privacy",
       "Accessibility",
       "Contact"
+    ]
+  },
+  "financialPolicy": {
+    "paymentModel": "insurance",
+    "pricingDisplay": "hidden",
+    "insurancePlans": [
+      {
+        "name": "Aetna",
+        "logo": "../shared/logos/aetna.svg"
+      },
+      {
+        "name": "Anthem",
+        "logo": "../shared/logos/anthem.svg"
+      },
+      {
+        "name": "Blue Cross Blue Shield of Texas",
+        "logo": "../shared/logos/bcbstx-logo.svg"
+      },
+      {
+        "name": "Cigna Healthcare",
+        "logo": "../shared/logos/cignahlthcr.svg"
+      },
+      {
+        "name": "Humana",
+        "logo": "../shared/logos/humana.svg"
+      }
     ]
   }
 }
